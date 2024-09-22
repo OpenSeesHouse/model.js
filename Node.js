@@ -1,11 +1,24 @@
-// Base class for a finite-element node
-class Node {
+import { ThreeObject } from "./ThreeObject";
+export class Node extends ThreeObject {
     static size = 0.5; // Default size for all nodes
     static color = 0xff0000; // Default color for all nodes
 
-    constructor(x, y, z) {
+    constructor(tag, x, y, z) {
+        super(tag);
         this.position = new THREE.Vector3(x, y, z);
         this.rotation = new THREE.Euler(0, 0, 0);
+    }
+
+    getName() {
+        return "Node";
+    }
+
+    addToDomain(Domain) {
+        Domain.addNode(this);
+    }
+
+    update() {
+        // Empty method for now
     }
 
     addToScene(scene) {
