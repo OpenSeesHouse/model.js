@@ -1,4 +1,5 @@
-import { ThreeObject } from "./ThreeObject";
+import { ThreeObject } from "./ThreeObject.js";
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
 export class Node extends ThreeObject {
     static size = 0.5; // Default size for all nodes
     static color = 0xff0000; // Default color for all nodes

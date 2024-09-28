@@ -1,7 +1,8 @@
-import {Truss} from "./Truss"
+import {Truss} from "./Truss.js"
 export class CorotTruss extends Truss {
-    constructor(tag, node1Tag, node2Tag) {
+    constructor(tag, node1Tag, node2Tag, args) {
         super(tag, node1Tag, node2Tag);
+        this.args = args;
     }
 
     getName() {

@@ -8,13 +8,13 @@ threeObject -> node  // implements addToDomain by adding itself to the "Nodes" d
 threeObject -> element //abstract class with abstract method getNumNode(); gets a list of $numNodes tags in constructor, obtains the nodes from Domain and stores their references internally, implements addToDomain() by adding itself to the "Elements" dictionary of the Domain, does not implement update() and addToScene() 
 threeObject -> element -> lineElement   //abstract, gets two tags of the end nodes and passes to the parent; implements getNumNode() by returning 2
 threeObject -> element -> lineElement ->truss  //non-abstract, implements addToScene() by drawing a straight line from node1 to node2, implements update() by re-invoking the coordinates of the end nodes and updating the mesh object, implements getName() by returining "truss"
-threeObject -> element -> lineElement ->truss->corotTruss // non-abstract
+threeObject -> element -> lineElement ->truss->CorotTruss // non-abstract
 threeObject -> element -> lineElement ->beamColumn // abstract, addToScene() and update() draw a spline from node1 to node2 using the nodes updated location and rotation
-threeObject -> element -> lineElement ->beamColumn -> elasticBeamColumn // non-abstract
+threeObject -> element -> lineElement ->beamColumn -> ElasticBeamColumn // non-abstract
 threeObject -> element -> lineElement ->beamColumn -> ModElasticBeam2d // non-abstract
 threeObject -> element -> lineElement ->beamColumn -> ElasticTimoshenkoBeam // non-abstract
 threeObject -> element -> lineElement ->beamColumn -> dispBeamColumn // non-abstract
 threeObject -> element -> lineElement ->beamColumn -> ForceBeamColumn // non-abstract
 threeObject -> element -> lineElement ->TwoNodeLink // non-abstract, addToScene() and update() draw either a spline or a line depending on other conditions, from node1 to node2 using the nodes position and rotation
 threeObject -> element -> quadElement   //abstract, gets four tags of the end nodes and passes to the parent; implements getNumNode() by returning 4
-threeObject -> element -> quadElement -> joint2D  //non-abstract, addToScene() and update() draw a parallelogram using the positions and rotations of node1 to node4 which are located at the mid-lengths of the sides 
+threeObject -> element -> quadElement -> Joint2D  //non-abstract, addToScene() and update() draw a parallelogram using the positions and rotations of node1 to node4 which are located at the mid-lengths of the sides 

@@ -1,3 +1,4 @@
+import { DomainObject } from "./Domain/DomainObject.js";
 export class ThreeObject extends DomainObject {
     constructor(tag) {
         super(tag);

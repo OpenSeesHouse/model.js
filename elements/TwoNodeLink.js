@@ -1,7 +1,8 @@
-import {LineElement} from "./LineElement"
+import {LineElement} from "./LineElement.js"
 export class TwoNodeLink extends LineElement {
-    constructor(tag, node1Tag, node2Tag) {
+    constructor(tag, node1Tag, node2Tag, args) {
         super(tag, node1Tag, node2Tag);
+        this.args = args;
     }
     
     getName() {

@@ -1,4 +1,4 @@
-import {LineElement} from "./LineElement"
+import {LineElement} from "./LineElement.js"
 export class Truss extends LineElement {
     constructor(tag, node1Tag, node2Tag) {
         super(tag, node1Tag, node2Tag);

@@ -1,4 +1,4 @@
-import { Element } from "./Element";
+import { Element } from "./Element.js";
 export class QuadElement extends Element {
     constructor(tag, node1Tag, node2Tag, node3Tag, node4Tag) {
         super(tag, [node1Tag, node2Tag, node3Tag, node4Tag]);

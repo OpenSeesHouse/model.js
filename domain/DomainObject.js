@@ -1,4 +1,3 @@
-import { Domain } from "./Domain";
 export class DomainObject {
     constructor(tag) {
         if (this.constructor === DomainObject) {
@@ -11,7 +10,7 @@ export class DomainObject {
         throw new Error("Method 'getName()' must be implemented.");
     }
 
-    addToDomain(domain) {
+    addToDomain(Domain) {
         throw new Error("Method 'addToDomain()' must be implemented.");
     }
 

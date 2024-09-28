@@ -1,8 +1,9 @@
-// import { Domain, Domain } from './domain/Domain.js'
-// import { Node } from './Node.js'
-// import { addElement } from './elements/addElement.js';
-
-// ایجاد صحنه، دوربین و رندر
+import { Domain } from './domain/Domain.js'
+import { Node } from './Node.js'
+import { Element } from "./elements/Element.js";
+import { addElement } from './elements/addElement.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.124/examples/jsm/controls/OrbitControls.js';// ایجاد صحنه، دوربین و رندر
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -15,7 +16,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // کنترل دوربین
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 camera.position.set(50, 50, 50);
 controls.update();
 
@@ -92,15 +93,16 @@ scene.add(gridHelper);
 // Create and add the objects
 
 //Domain
-const Domain = new Domain();
+const myDomain = new Domain();
 const nd1 = new Node(1, 0, 0, 0);
-nd1.addToDomain(Domain);
+nd1.addToDomain(myDomain);
 const nd2 = new Node(2, 0, 0, 5.0);
-nd2.addToDomain(Domain);
+nd2.addToDomain(myDomain);
 
 const ele = addElement('ForceBeamColumn', [1, 2]);
-ele.addToDomain(Domain);
+console.log(ele instanceof Element);
+ele.addToDomain(myDomain);
 
 //add all to scene
-Domain.addToScene(scene);
+myDomain.addToScene(scene);
 animate();

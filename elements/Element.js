@@ -1,7 +1,8 @@
-import { ThreeObject } from "../ThreeObject";
+import { ThreeObject } from "../ThreeObject.js";
 export class Element extends ThreeObject {
     constructor(tag, nodeTags, args = ['']) {
         super(tag);
+        // console.log('Element ctor')
         if (this.constructor === Element) {
             throw new Error("Abstract export classes can't be instantiated.");
         }

@@ -1,7 +1,8 @@
-import {QuadElement} from "./QuadElement"
+import {QuadElement} from "./QuadElement.js"
 export class Joint2D extends QuadElement {
-    constructor(tag, nodeTags) {
+    constructor(tag, nodeTags, args) {
         super(tag, nodeTags);
+        this.args = args;
     }
 
     getColor() {

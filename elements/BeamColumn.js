@@ -1,8 +1,10 @@
+import {LineElement} from "./LineElement.js"
 export class BeamColumn extends LineElement {
     static color = 0xff00ff; // Default color for all beamColumns
 
     constructor(tag, node1Tag, node2Tag) {
         super(tag, node1Tag, node2Tag);
+        // console.log('BeamColumn ctor')
         if (this.constructor === BeamColumn) {
             throw new Error("Abstract export classes can't be instantiated.");
         }
