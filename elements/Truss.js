@@ -1,3 +1,4 @@
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
 import {LineElement} from "./LineElement.js"
 export class Truss extends LineElement {
     constructor(tag, node1Tag, node2Tag) {

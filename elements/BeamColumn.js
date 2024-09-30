@@ -1,3 +1,4 @@
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
 import {LineElement} from "./LineElement.js"
 export class BeamColumn extends LineElement {
     static color = 0xff00ff; // Default color for all beamColumns

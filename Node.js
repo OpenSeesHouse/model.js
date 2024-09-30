@@ -1,8 +1,8 @@
 import { ThreeObject } from "./ThreeObject.js";
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
 export class Node extends ThreeObject {
-    static size = 0.5; // Default size for all nodes
-    static color = 0xff0000; // Default color for all nodes
+    static size = 0.2; // Default size for all nodes
+    static color = 0x000000; // Default color for all nodes
 
     constructor(tag, x, y, z) {
         super(tag);

@@ -20,28 +20,28 @@ export const allEleTypes = [
     'Joint2D',
 ];
 
-export async function addElement(eleName, tag, nodes, args = [""]) {
+export function addElement(eleName, tag, nodes, args = [""]) {
     if (!allEleTypes.includes(eleName)) {
         throw new Error('Unknown element type: ${eleName}');
     }
     switch (eleName) {
         case 'Truss':
-            return new Truss(tag, nodes, args);
+            return new Truss(tag, nodes[0], nodes[1], args);
         case 'CorotTruss':
-            return new CorotTruss(tag, nodes, args);
+            return new CorotTruss(tag, nodes[0], nodes[1], args);
         case 'ElasticBeamColumn':
-            return new ElasticBeamColumn(tag, nodes, args);
+            return new ElasticBeamColumn(tag, nodes[0], nodes[1], args);
         case 'ModElasticBeam2d':
-            return new ModElasticBeam2d(tag, nodes, args);
+            return new ModElasticBeam2d(tag, nodes[0], nodes[1], args);
         case 'ElasticTimoshenkoBeam':
-            return new ElasticTimoshenkoBeam(tag, nodes, args);
+            return new ElasticTimoshenkoBeam(tag, nodes[0], nodes[1], args);
         case 'ForceBeamColumn':
-            return new ForceBeamColumn(tag, nodes, args);
+            return new ForceBeamColumn(tag, nodes[0], nodes[1], args);
         case 'DispBeamColumn':
-            return new DispBeamColumn(tag, nodes, args);
+            return new DispBeamColumn(tag, nodes[0], nodes[1], args);
         case 'TwoNodeLink':
-            return new TwoNodeLink(tag, nodes, args);
+            return new TwoNodeLink(tag, nodes[0], nodes[1], args);
         case 'Joint2D':
-            return new Joint2D(tag, nodes, args);
+            return new Joint2D(tag, nodes[0], nodes[1], nodes[2], nodes[3], args);
     }
 }

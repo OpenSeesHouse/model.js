@@ -28,36 +28,29 @@ export class Domain {
     }
 
     addNode(Node) {
-        for (let tg of this.Nodes.keys()) 
-        {
-            if (tg === Node.tag)
-            {
-                throw new Error("Node with tag ${tg} already exists in Domain");
-                
+        for (let tg of this.Nodes.keys()) {
+            if (tg === Node.tag) {
+                throw new Error(`Node with tag ${tg} already exists in Domain`);
+
             }
         }
-        this.Nodes[Node.tag] = Node;
+        this.Nodes.set(Node.tag, Node);
     }
     addElement(ele) {
-        for (let tg of this.Elements.keys()) 
-        {
-            if (tg === ele.tag)
-            {
-                throw new Error("Element with tag ${tg} already exists in Domain");
-                
+        for (let tg of this.Elements.keys()) {
+            if (tg === ele.tag) {
+                throw new Error(`Element with tag ${tg} already exists in Domain`);
+
             }
         }
-        this.Elements[ele.tag] = ele;
+        this.Elements.set(ele.tag, ele);
     }
 
-    addToScene(scene)
-    {
-        for (let nd of this.Nodes.values)
-        {
+    addToScene(scene) {
+        for (let nd of this.Nodes.values()) {
             nd.addToScene(scene);
         }
-        for (let ele of this.Elements.values)
-        {
+        for (let ele of this.Elements.values()) {
             ele.addToScene(scene);
         }
     }

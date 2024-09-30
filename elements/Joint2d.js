@@ -1,3 +1,4 @@
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
 import {QuadElement} from "./QuadElement.js"
 export class Joint2D extends QuadElement {
     constructor(tag, nodeTags, args) {

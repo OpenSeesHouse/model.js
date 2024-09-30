@@ -1,4 +1,5 @@
 import { ThreeObject } from "../ThreeObject.js";
+import { Domain } from "../domain/Domain.js";
 export class Element extends ThreeObject {
     constructor(tag, nodeTags, args = ['']) {
         super(tag);
@@ -15,7 +16,7 @@ export class Element extends ThreeObject {
     }
 
     addToDomain(Domain) {
-        this.nodes = nodeTags.map(tag => Domain.Nodes[tag]);
+        this.nodes = this.nodeTags.map(tag => Domain.Nodes.get(tag));
         Domain.addElement(this);
     }
 }
