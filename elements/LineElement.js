@@ -6,5 +6,8 @@ export class LineElement extends Element {
             throw new Error("Abstract export classes can't be instantiated.");
         }
     }
+    getNumNodes() {
+        return 2;
+    }
 }
 

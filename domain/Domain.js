@@ -28,21 +28,13 @@ export class Domain {
     }
 
     addNode(Node) {
-        for (let tg of this.Nodes.keys()) {
-            if (tg === Node.tag) {
-                throw new Error(`Node with tag ${tg} already exists in Domain`);
-
-            }
-        }
+        if (this.Nodes[Node.tag])
+            throw new Error(`Node with tag ${tg} already exists in Domain`);
         this.Nodes.set(Node.tag, Node);
     }
     addElement(ele) {
-        for (let tg of this.Elements.keys()) {
-            if (tg === ele.tag) {
-                throw new Error(`Element with tag ${tg} already exists in Domain`);
-
-            }
-        }
+        if (this.Elements[ele.tag])
+            throw new Error(`Element with tag ${tg} already exists in Domain`);
         this.Elements.set(ele.tag, ele);
     }
 

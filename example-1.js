@@ -1,4 +1,4 @@
-import { Domain } from './domain/Domain.js'
+import { Domain } from './Domain/Domain.js'
 import { Node } from './Node.js'
 import { InitScene } from './Scene/InitScene.js'
 

@@ -1,5 +1,5 @@
 import { ThreeObject } from "../ThreeObject.js";
-import { Domain } from "../domain/Domain.js";
+import { Domain } from "../Domain/Domain.js";
 export class Element extends ThreeObject {
     constructor(tag, nodeTags, args = ['']) {
         super(tag);
@@ -12,7 +12,7 @@ export class Element extends ThreeObject {
     }
 
     getNumNodes() {
-        return this.nodeTags.length;
+        throw new Error("Method 'getNumNodes()' must be implemented.");
     }
 
     addToDomain(Domain) {

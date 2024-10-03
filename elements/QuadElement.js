@@ -6,5 +6,8 @@ export class QuadElement extends Element {
             throw new Error("Abstract export classes can't be instantiated.");
         }
     }
+    getNumNodes() {
+        return 4;
+    }
 }
 

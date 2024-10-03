@@ -20,9 +20,22 @@ export const allEleTypes = [
     'Joint2D',
 ];
 
+export const numNodeMap = new Map([
+    ['Truss', 2],
+    ['CorotTruss', 2],
+    ['ElasticBeamColumn', 2],
+    ['ModElasticBeam2d', 2],
+    ['ElasticTimoshenkoBeam', 2],
+    ['ForceBeamColumn', 2],
+    ['DispBeamColumn', 2],
+    ['TwoNodeLink', 2],
+    ['Joint2D', 2]
+]
+);
+
 export function addElement(eleName, tag, nodes, args = [""]) {
     if (!allEleTypes.includes(eleName)) {
-        throw new Error('Unknown element type: ${eleName}');
+        throw new Error(`Unknown element type: ${eleName}`);
     }
     switch (eleName) {
         case 'Truss':
