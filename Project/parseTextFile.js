@@ -1,18 +1,11 @@
-export function parseTextFile(fileUrl) {
-    // Fetch the file from the server
-    console.log(`fetch ${fileUrl}`)
-    const response = fetch(fileUrl);
-    console.log(response);
+export async function parseTextFile(fileUrl) {
+    const response = await fetch(fileUrl);
     if (!response.ok) {
-        throw new Error('Network response was not ok: ' + response.statusText);
+      throw new Error("Network response was not ok: " + response.statusText);
     }
-    console.log(response)
-    const text = response.text();
-    const lines = text.split('\n');
-    console.log(lines[0]);
-    // Split each line into words and store in a 2D array
-    const wordsArray = lines.map(line => line.split(' '));
-
-    // If you need to use the wordsArray further, you can do so here
+    const text = await response.text();
+    const lines = text.split("\n");
+    const wordsArray = lines.map((line) => line.split(" "));
     return wordsArray;
-}
+  }
+  

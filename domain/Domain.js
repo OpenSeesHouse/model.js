@@ -38,10 +38,15 @@ export class Domain {
         this.Elements.set(ele.tag, ele);
     }
 
-    addToScene(scene) {
-        for (let nd of this.Nodes.values()) {
-            nd.addToScene(scene);
-        }
+    async addToScene(scene) {
+        console.log(this);
+        console.log(this.Nodes);
+        this.Nodes.values().then(vals => {
+            for (let nd of vals) {
+                console.log(nd)
+                nd.addToScene(scene);
+            }
+        });
         for (let ele of this.Elements.values()) {
             ele.addToScene(scene);
         }

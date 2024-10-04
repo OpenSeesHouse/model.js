@@ -8,17 +8,17 @@ import { DispBeamColumn } from './DispBeamColumn.js';
 import { TwoNodeLink } from './TwoNodeLink.js';
 import { Joint2D } from './Joint2D.js';
 
-export const allEleTypes = [
-    'Truss',
-    'CorotTruss',
-    'ElasticBeamColumn',
-    'ModElasticBeam2d',
-    'ElasticTimoshenkoBeam',
-    'ForceBeamColumn',
-    'DispBeamColumn',
-    'TwoNodeLink',
-    'Joint2D',
-];
+export const allEleCommands = new Map([
+    ['truss', 'Truss'],
+    ['corotTruss', 'CorotTruss'],
+    ['elasticBeamColumn', 'ElasticBeamColumn'],
+    ['ModElasticBeam2d', 'ModElasticBeam2d'],
+    ['ElasticTimoshenkoBeam', 'ElasticTimoshenkoBeam'],
+    ['forceBeamColumn', 'ForceBeamColumn'],
+    ['dispBeamColumn', 'DispBeamColumn'],
+    ['twoNodeLink', 'TwoNodeLink'],
+    ['Joint2D', 'Joint2D'],
+]);
 
 export const numNodeMap = new Map([
     ['Truss', 2],
@@ -33,8 +33,10 @@ export const numNodeMap = new Map([
 ]
 );
 
-export function addElement(eleName, tag, nodes, args = [""]) {
-    if (!allEleTypes.includes(eleName)) {
+export async function addElement(eleName, tag, nodes, args = [""]) {
+    const values = await allEleCommands.values();
+    const valsArr = [...values];
+    if (!valsArr.includes(eleName)) {
         throw new Error(`Unknown element type: ${eleName}`);
     }
     switch (eleName) {

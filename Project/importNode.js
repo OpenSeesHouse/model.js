@@ -16,9 +16,10 @@ export function importNode(myDomain, words) {
     if (isNaN(y)) {
         throw new Error(`Invalid y: ${words[2]}`);
     }
-    const z = parseFloat(words[3]);
+    let z = parseFloat(words[3]);
     if (isNaN(z)) {
-        throw new Error(`Invalid z: ${words[3]}`);
+        // throw new Error(`Invalid z: ${words[3]}`);
+        z = 0;
     }
     const nod = new Node(tag, x, y, z);
     nod.addToDomain(myDomain);
