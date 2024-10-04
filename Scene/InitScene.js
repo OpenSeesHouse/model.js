@@ -3,23 +3,31 @@ import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.124/examples
 import { InitAxes } from "./InitAxes.js";
 
 
-export function InitScene(backColor, gridColor, gridSize, axesSize) {
+export function InitScene(backColor, gridColor, gridSize, nGridDivs, axesSize, ndm) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(backColor);
-    THREE.Object3D.DefaultUp.set(0, 0, 1);
     const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
-        0.1,
-        1000
+        0.1*axesSize/20,
+        5000*axesSize/20
     );
+    const camDist = gridSize / 4;
+    if (ndm == 3) {
+        camera.position.set(-camDist, -camDist, camDist);
+        THREE.Object3D.DefaultUp.set(0, 0, 1);
+    } else {
+        // camera.position.set(-camDist, -camDist, camDist);
+        // THREE.Object3D.DefaultUp.set(0, 0, 1);
+        camera.position.set(0, 0, camDist);
+        THREE.Object3D.DefaultUp.set(0, 1, 0);
+    }
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
     // کنترل دوربین
     const controls = new OrbitControls(camera, renderer.domElement);
-    camera.position.set(-10, -10, 10);
     camera.lookAt(0, 0, 0);
     controls.update();
 
@@ -40,10 +48,11 @@ export function InitScene(backColor, gridColor, gridSize, axesSize) {
     Axes.renderOrder = 1;
     scene.add(Axes);
 
-    
+
     // شبکه شطرنجی
-    const gridHelper = new THREE.GridHelper(gridSize, gridSize, gridColor, gridColor);
-    gridHelper.rotation.x = Math.PI / 2;
+    const gridHelper = new THREE.GridHelper(gridSize, nGridDivs, gridColor, gridColor);
+    if (ndm == 3)
+        gridHelper.rotation.x = Math.PI / 2;
     scene.add(gridHelper);
 
     return [scene, controls, renderer, camera];

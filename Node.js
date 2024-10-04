@@ -22,7 +22,7 @@ export class Node extends ThreeObject {
         // Empty method for now
     }
 
-    addToScene(scene) {
+    async addToScene(scene) {
         const geometry = new THREE.BoxGeometry(Node.size, Node.size, Node.size);
         const material = new THREE.MeshBasicMaterial({ color: Node.color });
         this.mesh = new THREE.Mesh(geometry, material);
@@ -44,4 +44,5 @@ export class Node extends ThreeObject {
             this.mesh.rotation.copy(this.rotation);
         }
     }
+
 }

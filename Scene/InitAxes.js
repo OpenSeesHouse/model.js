@@ -11,7 +11,7 @@ export function InitAxes(size) {
     ]);
     const xMaterial = new THREE.LineBasicMaterial({
         color: 0xff0000,
-        linewidth: 10,
+        linewidth: 10*size,
     }); // تنظیم ضخامت
     const xAxis = new THREE.Line(xGeometry, xMaterial);
     xAxis.material.depthTest = false;
@@ -24,7 +24,7 @@ export function InitAxes(size) {
     ]);
     const yMaterial = new THREE.LineBasicMaterial({
         color: 0x00ff00,
-        linewidth: 10,
+        linewidth: 10*size,
     }); // تنظیم ضخامت
     const yAxis = new THREE.Line(yGeometry, yMaterial);
     yAxis.material.depthTest = false;
@@ -37,16 +37,16 @@ export function InitAxes(size) {
     ]);
     const zMaterial = new THREE.LineBasicMaterial({
         color: 0x0000ff,
-        linewidth: 10,
+        linewidth: 10*size,
     }); // تنظیم ضخامت
     const zAxis = new THREE.Line(zGeometry, zMaterial);
     zAxis.material.depthTest = false;
     axesGroup.add(zAxis);
 
     // Create and position the labels
-    const xLabel = createTextLabel('X', new THREE.Vector3(size, 0, 0), 100);
-    const yLabel = createTextLabel('Y', new THREE.Vector3(0, size, 0), 100);
-    const zLabel = createTextLabel('Z', new THREE.Vector3(0, 0, size), 100);
+    const xLabel = createTextLabel('X', new THREE.Vector3(size, 0, 0), 40, 100);
+    const yLabel = createTextLabel('Y', new THREE.Vector3(0, size, 0), 40, 100);
+    const zLabel = createTextLabel('Z', new THREE.Vector3(0, 0, size), 40, 100);
     axesGroup.add(xLabel);
     axesGroup.add(yLabel);
     axesGroup.add(zLabel);
