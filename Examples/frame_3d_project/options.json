@@ -1,0 +1,13 @@
+{
+    "backColor"          : "0xf0f0f0",
+    "gridColor"          : "0x888888",
+    "gridSize"           : 40,
+    "axesSize"           : 5,
+    "Units"              : "N,m",
+    "ShowNodes"          : true,
+    "ShowEleTags"        : true,
+    "ShowNodeTags"       : true,
+    "NodeSize"           : 0.2,
+    "EleTagSize"         : 0.2,
+    "NodeTagSize"        : 0.2
+}

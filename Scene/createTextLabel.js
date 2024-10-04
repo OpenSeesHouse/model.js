@@ -1,6 +1,5 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.124/build/three.module.js';
 export function createTextLabel(text, position, fntSize, size) {
-console.log('createTextLabel(', text, position.toArray(), fntSize);
     const canvas = document.createElement('canvas');
     const scaleFac = 10;
     canvas.width = canvas.width*scaleFac;

@@ -1,3 +1,4 @@
+#Units N,cm
 model basic -ndm 3 -ndf 6
 node 11 0.0 0.0 0.0
 node 12 600.0 0.0 0.0
