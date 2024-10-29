@@ -1,5 +1,4 @@
 import { Project } from "./Project/Project";
-
 (async () => {
   const theProj = new Project();
   await theProj.init(
