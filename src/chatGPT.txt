@@ -1,0 +1,20 @@
+Consider below descriptions, provide each class in a separate message sequentially, without any extra descriptions.
+I use "parent -> child" notification
+I need to build a class hierarchy as:
+Domain  //storage class containing "Nodes", "Elements", "UniaxialMaterials", "NDMaterials", "Sections", "Patterns", "Recorders" dictionaries each mapping an integer to a DomainObject, also contains an update() method which iterates through all contained DomainObjects and calls their update(). has a method wipe() which clears all maps. has a method addToScene(scene) which calls the addToScene() method of all contained threeObject's
+DomainObject //abstract class with an integer tag and abstract getName(), addToDomain() and update() methods - getName() is implemented in each non-abstract method by returning the class name
+DomainObject -> threeObject // abstract class with abstract method addToScene(scene) and getColor(). scene is the three scene. getColor() returns the color for drawing the object in three and is implemented in all non-abstract classes and is called when color is required for adding the object to the scene
+threeObject -> node  // implements addToDomain by adding itself to the "Nodes" dictionary of the Domain, implements update as an empty method. Recieves in its constructor an array of 6 floating points. The first 3 are the X,Y,Z coordinates and the last 3 inputs are the node rotation about X,Y,Z axes. implements addToScene() by adding a cube to hree. The cube has equal side lengths given by size. size is a static member variable. implements an updateGeom() method that recieves new array of 6 values and updates the geometry of the cube in the scene. 
+threeObject -> element //abstract class with abstract method getNumNode(); gets a list of $numNodes tags in constructor, obtains the nodes from Domain and stores their references internally, implements addToDomain() by adding itself to the "Elements" dictionary of the Domain, does not implement update() and addToScene() 
+threeObject -> element -> lineElement   //abstract, gets two tags of the end nodes and passes to the parent; implements getNumNode() by returning 2
+threeObject -> element -> lineElement ->truss  //non-abstract, implements addToScene() by drawing a straight line from node1 to node2, implements update() by re-invoking the coordinates of the end nodes and updating the mesh object, implements getName() by returining "truss"
+threeObject -> element -> lineElement ->truss->CorotTruss // non-abstract
+threeObject -> element -> lineElement ->beamColumn // abstract, addToScene() and update() draw a spline from node1 to node2 using the nodes updated location and rotation
+threeObject -> element -> lineElement ->beamColumn -> ElasticBeamColumn // non-abstract
+threeObject -> element -> lineElement ->beamColumn -> ModElasticBeam2d // non-abstract
+threeObject -> element -> lineElement ->beamColumn -> ElasticTimoshenkoBeam // non-abstract
+threeObject -> element -> lineElement ->beamColumn -> dispBeamColumn // non-abstract
+threeObject -> element -> lineElement ->beamColumn -> ForceBeamColumn // non-abstract
+threeObject -> element -> lineElement ->TwoNodeLink // non-abstract, addToScene() and update() draw either a spline or a line depending on other conditions, from node1 to node2 using the nodes position and rotation
+threeObject -> element -> quadElement   //abstract, gets four tags of the end nodes and passes to the parent; implements getNumNode() by returning 4
+threeObject -> element -> quadElement -> Joint2D  //non-abstract, addToScene() and update() draw a parallelogram using the positions and rotations of node1 to node4 which are located at the mid-lengths of the sides 
