@@ -8,6 +8,6 @@ export class ElasticBeamColumn extends BeamColumn {
         return "ElasticBeamColumn";
     }
     getColor():number {
-        return 0x00ff00
+        return 0x000000
     }
 }

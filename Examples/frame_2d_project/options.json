@@ -1,7 +1,6 @@
 {
     "backColor"          : "0xf0f0f0",
-    "gridColor"          : "0x888888",
-    "gridSize"           : 40,
+    "gridColor"          : "0xccff66",
     "axesSize"           : 5,
     "Units"              : "N,m",
     "ShowNodes"          : true,

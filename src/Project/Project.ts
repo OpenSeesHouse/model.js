@@ -8,9 +8,8 @@ import * as THREE from "three";
 interface Options {
   backColor: number;
   gridColor: number;
-  gridSize: number;
   Units: string;
-  nGridDivs: number;
+  gridSpan: number;
   axesSize: number;
   NodeSize: number;
   EleTagSize: number;
@@ -29,7 +28,8 @@ export class Project {
   options!: Options;
   ForceUnits!: string;
   LengthUnits!: string;
-  constructor() {}
+  Labels!: THREE.Group;
+  constructor() { }
 
   async init(name: string, projPath: string, cmndsFileName: string) {
     this.Name = name;
@@ -65,6 +65,8 @@ export class Project {
   animate() {
     requestAnimationFrame(this.animate.bind(this));
     this.Controls.update();
+    // this.Labels.quaternion.copy(this.Camera.quaternion);
+    // this.Labels.lookAt(this.Camera.position);
     this.Renderer.render(this.Scene, this.Camera);
   }
   async importTcl() {
@@ -89,7 +91,7 @@ export class Project {
           await importElement(this.Domain, remainingWords);
           break;
         default:
-        // console.log("Unhandled TCL command:", firstWord);
+          // console.log("Unhandled TCL command:", firstWord);
       }
     }
   }
@@ -99,12 +101,11 @@ export class Project {
     this.ForceUnits = words[0];
     this.LengthUnits = words[1];
     const fac = await this.getLengthFac();
-    this.options.gridSize = 40 / fac;
-    this.options.nGridDivs = 40;
-    this.options.axesSize = 1 / fac;
-    this.options.NodeSize = 0.2 / fac;
-    this.options.EleTagSize = 0.2 / fac;
-    this.options.NodeTagSize = 0.2 / fac;
+    this.options.axesSize /= fac;
+    this.options.NodeSize /= fac;
+    this.options.EleTagSize /= fac;
+    this.options.NodeTagSize /= fac;
+    this.options.gridSpan /= fac;
   }
 
   async getLengthFac() {
@@ -126,11 +127,17 @@ export class Project {
   addToScene() {
     if (!this.Scene) {
       Domain.setNodeSize(this.options.NodeSize);
-      [this.Scene, this.Controls, this.Renderer, this.Camera] = InitScene(
+      let minX, maxX , minY , maxY , minZ , maxZ;
+      [minX, maxX, minY, maxY, minZ, maxZ] = this.Domain.getNodeBounds();
+      minX = Math.floor(minX);
+      maxX = Math.ceil(maxX);
+      minY = Math.floor(minY);
+      maxY = Math.ceil(maxY);
+      [this.Scene, this.Controls, this.Renderer, this.Camera, this.Labels] = InitScene(
         this.options.backColor,
         this.options.gridColor,
-        this.options.gridSize,
-        this.options.nGridDivs,
+        minX, maxX, minY, maxY,
+        this.options.gridSpan,
         this.options.axesSize,
         this.NDM
       );

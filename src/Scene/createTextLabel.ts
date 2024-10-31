@@ -1,22 +1,29 @@
 import * as THREE from "three";
-export function createTextLabel(text:string, position:THREE.Vector3, fntSize:number, size:number) {
-    const canvas = document.createElement('canvas');
-    const scaleFac = 10;
-    canvas.width = canvas.width*scaleFac;
-    canvas.height = canvas.height*scaleFac;
-    const context = canvas.getContext('2d');
-    if (context == null)
-        throw new Error('null 2d context returned for text lable');
-    context.scale(scaleFac,scaleFac);
-    context.font = `${fntSize}px Arial`;
-    context.fillStyle = 'black';
-    context.fillText(text, 0, fntSize);
-    
-    const texture = new THREE.CanvasTexture(canvas);
-    const spriteMaterial = new THREE.SpriteMaterial({ map: texture, depthTest: false, depthWrite: false  });
-    const sprite = new THREE.Sprite(spriteMaterial);
-    sprite.scale.set(size, size/2, 1); // Adjust the scale as needed
-    sprite.position.copy(position);
-
-    return sprite;
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+export function createTextLabel(text: string, position: THREE.Vector3, depth: number, size: number, color: number): Promise<THREE.Mesh> {
+    return new Promise((resolve, reject) => {
+        const loader = new FontLoader();
+        const fontUrl = './fonts/Calibri_Regular.json';
+        loader.load(fontUrl, (font) => {
+            // Create text geometry
+            const textGeometry = new TextGeometry(text, {
+                font: font,
+                size: size,
+                depth: depth,
+                curveSegments: 12,
+                bevelEnabled: false,
+                // bevelThickness: 0.1,
+                // bevelSize: 0.05,
+                // bevelOffset: 0,
+                // bevelSegments: 5
+            });
+            const textMaterial = new THREE.MeshBasicMaterial({ color: color });
+            const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+            textMesh.position.copy(position);
+            resolve(textMesh);
+        }, undefined, (error) => {
+            reject(error);
+        });
+    });
 }

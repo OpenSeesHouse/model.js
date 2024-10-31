@@ -63,6 +63,7 @@ export class Domain {
   static setNodeSize(size: number) {
     Node.size = size;
   }
+  
   getNodeBounds() {
     let maxX = -Infinity;
     let maxY = -Infinity;
@@ -80,6 +81,6 @@ export class Domain {
       if (node.position.z > maxZ) maxZ = node.position.z;
       else if (node.position.z < minZ) minZ = node.position.z;
     }
-    return [minX, minY, minZ, maxX, maxY, maxZ];
+    return [minX, maxX, minY, maxY, minZ, maxZ];
   }
 }

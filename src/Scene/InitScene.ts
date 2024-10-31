@@ -5,11 +5,15 @@ import { InitAxes } from "./InitAxes";
 export function InitScene(
   backColor: number,
   gridColor: number,
-  gridSize: number,
-  nGridDivs: number,
+  xMin:number,
+  xMax:number,
+  yMin:number,
+  yMax:number,
+  gridSpan: number,
   axesSize: number,
   ndm: number
-): [THREE.Scene, OrbitControls, THREE.WebGLRenderer, THREE.PerspectiveCamera] {
+): [THREE.Scene, OrbitControls, THREE.WebGLRenderer, THREE.PerspectiveCamera, THREE.Group] {
+
   const scene: THREE.Scene = new THREE.Scene();
   scene.background = new THREE.Color(backColor);
   const camera = new THREE.PerspectiveCamera(
@@ -18,7 +22,10 @@ export function InitScene(
     (0.1 * axesSize) / 20,
     (5000 * axesSize) / 20
   );
-  const camDist = gridSize / 4;
+  let size = 4* Math.max(Math.abs(xMax), Math.abs(xMin), Math.abs(yMin), Math.abs(yMax));
+  const nGridDivs = Math.ceil(size/gridSpan);
+  size = nGridDivs*gridSpan;
+  const camDist = size / 4;
   if (ndm == 3) {
     camera.position.set(-camDist, -camDist, camDist);
     THREE.Object3D.DEFAULT_UP.set(0, 0, 1);
@@ -32,35 +39,36 @@ export function InitScene(
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  // کنترل دوربین
+  //Camera control
   const controls = new OrbitControls(camera, renderer.domElement);
   camera.lookAt(0, 0, 0);
   controls.update();
 
-  // ریسایز صفحه
+  // screen resize
   window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
 
-  // // محور‌های X، Y، Z
-  // const axesHelper = new THREE.AxesHelper(10);
-  // scene.add(axesHelper);
-  // اضافه کردن محورها به صحنه
-  const Axes = InitAxes(axesSize);
+
+  const [Axes, labels] = InitAxes(axesSize);
   Axes.renderOrder = 1;
   scene.add(Axes);
+  scene.add(labels);
 
-  // شبکه شطرنجی
+  // the horizon
   const gridHelper = new THREE.GridHelper(
-    gridSize,
+    size,
     nGridDivs,
     gridColor,
     gridColor
   );
+  gridHelper.position.set((xMax+xMin)/2,(yMax+yMin)/2,0);
+  // console.log(`position.set(${(xMax+xMin)/2},${(yMax+yMin)/2},0)`);
+  
   if (ndm == 3) gridHelper.rotation.x = Math.PI / 2;
   scene.add(gridHelper);
 
-  return [scene, controls, renderer, camera];
+  return [scene, controls, renderer, camera, labels];
 }

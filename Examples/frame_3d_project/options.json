@@ -1,8 +1,8 @@
 {
     "backColor"          : "0xf0f0f0",
-    "gridColor"          : "0x888888",
-    "gridSize"           : 40,
-    "axesSize"           : 5,
+    "gridColor"          : "0xcc99ff",
+    "gridSpan"          : 1.0,
+    "axesSize"           : 2,
     "Units"              : "N,m",
     "ShowNodes"          : true,
     "ShowEleTags"        : true,
