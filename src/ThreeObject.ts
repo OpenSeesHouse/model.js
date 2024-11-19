@@ -1,11 +1,10 @@
-import * as THREE from "three";
-import { DomainObject } from "./Domain/DomainObject";
+import { DomainObject } from './Domain/DomainObject';
+import { Scene } from './Graphics/Scene';
 export abstract class ThreeObject extends DomainObject {
-    constructor(tag:number) {
-        super(tag);
-    }
+  constructor(tag: number) {
+    super(tag);
+  }
 
-    abstract addToScene(scene:THREE.Scene):void;
-    abstract getColor():number;
+  abstract addToScene(scene: Scene, fac:number): void;
+  abstract getColor(): number;
 }
-

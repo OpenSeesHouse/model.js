@@ -1,8 +1,8 @@
 const path = require("path");
 
 module.exports = {
-  mode: "development", // or 'production' or 'none'
-  entry: "./src/example-3.ts",
+  mode: "development", // development or 'production' or 'none'
+  entry: "./src/index.ts",
   module: {
     rules: [
       {

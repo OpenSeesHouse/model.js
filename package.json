@@ -2,10 +2,11 @@
   "type": "commonjs",
   "name": "model",
   "version": "1.0.0",
-  "main": "example-3.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "format": "prettier --write \"src/**/*.{js,ts,jsx,tsx,css,html,json}\""
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "three": "^0.169.0"
   },
   "devDependencies": {
+    "prettier": "^3.3.3",
     "ts-loader": "^9.5.1",
     "typescript": "^5.6.3",
     "webpack": "^5.95.0",

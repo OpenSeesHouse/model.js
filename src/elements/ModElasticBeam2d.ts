@@ -1,13 +1,13 @@
-import {BeamColumn} from "./BeamColumn"
+import { BeamColumn } from './BeamColumn';
 export class ModElasticBeam2d extends BeamColumn {
-    constructor(tag:number, nodeTags:number[], args:string[]) {
-        super(tag, nodeTags, args);
-    }
+  constructor(tag: number, nodeTags: number[], args: string[]) {
+    super(tag, nodeTags, args);
+  }
 
-    getName() {
-        return "ModElasticBeam2d";
-    }
-    getColor() {
-        return 0x00ff00
-    }
+  getName() {
+    return 'ModElasticBeam2d';
+  }
+  getColor() {
+    return 0x00ff00;
+  }
 }

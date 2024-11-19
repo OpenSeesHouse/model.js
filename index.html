@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>model example</title>
+<title>Three.js Multiple Views</title>
 <style>
-body { margin: 0; }
-canvas { display: block; }
+body { margin: 0; display: flex; flex-wrap: wrap; }
+canvas { width: 50%; height: 100vh}
 </style>
 </head>
 <body>
+<canvas id="canvas1"></canvas>
+<canvas id="canvas2"></canvas>
 <script src="dist/bundle.js"></script>
 </body>
 </html>

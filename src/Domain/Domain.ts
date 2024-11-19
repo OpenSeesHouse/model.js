@@ -1,9 +1,20 @@
-import * as THREE from "three";
 import { Node } from "../Node";
 import { Element } from "../elements/Element";
+import { ForceUnit, LengthUnit, Units } from "./units";
+import { Scene } from "../Graphics/Scene";
+
 export class Domain {
+  NDM: number;
+  units: Units
   Nodes: Map<number, Node>;
   Elements: Map<number, Element>;
+  theSize: number = 0;
+  maxX: number = -Infinity;
+  maxY: number = -Infinity;
+  maxZ: number = -Infinity;
+  minX: number = Infinity;
+  minY: number = Infinity;
+  minZ: number = Infinity;
   // UniaxialMaterials: Map<number,UniaxialMaterial>;
   // NDMaterials: Map<number,NDMaterial>;
   // Sections: Map<number,Section>;
@@ -12,15 +23,16 @@ export class Domain {
   constructor() {
     this.Nodes = new Map<number, Node>();
     this.Elements = new Map<number, Element>();
+    this.units = new Units(LengthUnit.m, ForceUnit.N);
     // this.UniaxialMaterials = new Map();
     // this.NDMaterials = new Map();
     // this.Sections = new Map();
     // this.Patterns = new Map();
     // this.Recorders = new Map();
   }
-  update() {
-    for (let obj of this.Nodes.values()) obj.update();
-    for (let obj of this.Elements.values()) obj.update();
+  update(fac:number) {
+    for (let obj of this.Nodes.values()) obj.update(fac);
+    for (let obj of this.Elements.values()) obj.update(fac);
     // for (let obj of this.UniaxialMaterials.values()) obj.update();
     // for (let obj of this.NDMaterials.values()) obj.update();
     // for (let obj of this.Sections.values()) obj.update();
@@ -42,6 +54,12 @@ export class Domain {
       throw new Error(`Node with tag ${node.tag} already exists in Domain`);
     // console.log(`this.Nodes.set(${Node.tag}, ${Node})`)
     this.Nodes.set(node.tag, node);
+    if (node.position.x > this.maxX) this.maxX = node.position.x;
+    else if (node.position.x < this.minX) this.minX = node.position.x;
+    if (node.position.y > this.maxY) this.maxY = node.position.y;
+    else if (node.position.y < this.minY) this.minY = node.position.y;
+    if (node.position.z > this.maxZ) this.maxZ = node.position.z;
+    else if (node.position.z < this.minZ) this.minZ = node.position.z;
   }
   addElement(ele: Element) {
     if (this.Elements.has(ele.tag))
@@ -49,38 +67,28 @@ export class Domain {
     this.Elements.set(ele.tag, ele);
   }
 
-  addToScene(scene: THREE.Scene) {
+  addToScene(scene: Scene, fac:number) {
     for (let nd of this.Nodes.values()) {
-    //   console.log(nd);
+      //   console.log(nd);
       // console.log("nd.addToScene(scene)");
-      nd.addToScene(scene);
+      nd.addToScene(scene, fac);
     }
     for (let ele of this.Elements.values()) {
-      ele.addToScene(scene);
+      ele.addToScene(scene, fac);
     }
   }
 
-  static setNodeSize(size: number) {
-    Node.size = size;
+  get nodeBounds(): number[] {
+    return [this.minX, this.maxX, this.minY, this.maxY, this.minZ, this.maxZ];
   }
-  
-  getNodeBounds() {
-    let maxX = -Infinity;
-    let maxY = -Infinity;
-    let maxZ = -Infinity;
-    let minX = Infinity;
-    let minY = Infinity;
-    let minZ = Infinity;
 
-    // Iterate through the Map
-    for (let node of this.Nodes.values()) {
-      if (node.position.x > maxX) maxX = node.position.x;
-      else if (node.position.x < minX) minX = node.position.x;
-      if (node.position.y > maxY) maxY = node.position.y;
-      else if (node.position.y < minY) minY = node.position.y;
-      if (node.position.z > maxZ) maxZ = node.position.z;
-      else if (node.position.z < minZ) minZ = node.position.z;
-    }
-    return [minX, maxX, minY, maxY, minZ, maxZ];
+  get size(): number {
+    if (this.theSize !== 0)
+      return this.theSize;
+    this.nodeBounds.forEach(val =>
+      this.theSize = Math.max(this.theSize, Math.abs(val))
+    );
+    return this.theSize;
   }
+
 }

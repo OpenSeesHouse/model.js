@@ -1,13 +1,13 @@
-import {Truss} from "./Truss"
+import { Truss } from './Truss';
 export class CorotTruss extends Truss {
-    constructor(tag:number, nodeTags:number[], args:string[]) {
-        super(tag, nodeTags, args);
-    }
+  constructor(tag: number, nodeTags: number[], args: string[]) {
+    super(tag, nodeTags, args);
+  }
 
-    getName():string {
-        return "CorotTruss";
-    }
-    getColor():number {
-        return 0x00ff00
-    }
+  getName(): string {
+    return 'CorotTruss';
+  }
+  getColor(): number {
+    return 0x00ff00;
+  }
 }
